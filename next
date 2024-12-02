@@ -1,0 +1,17 @@
+#!/bin/bash
+
+last_day=$(find . -name 'day*' -type d | tail -n1 | sed -E 's/.\/day0?//')
+day=$(printf "day%02d" "$(( last_day + 1))")
+
+mkdir "$day"
+touch "$day/example.txt" "$day/input.txt"
+cat << EOF > "$day/${day//d/D}.hs"
+main :: IO ()
+main = do
+  input <- parse <$> getContents
+  -- Part 1
+  -- Part 2
+
+parse :: String -> [[Int]]
+parse = map (map read . words) . lines
+EOF
