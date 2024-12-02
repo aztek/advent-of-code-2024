@@ -1,0 +1,13 @@
+#!/bin/bash
+
+run() {
+  dir=$1
+  day=$(basename "$dir")
+  echo "$day"
+  runhaskell "$dir/${day//d/D}.hs" < "$dir/input.txt"
+  echo
+}
+
+export -f run
+
+find . -name 'day*' -type d -exec bash -c 'run "$@"' bash {} \;
