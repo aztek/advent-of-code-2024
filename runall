@@ -4,7 +4,13 @@ run() {
   dir=$1
   day=$(basename "$dir")
   echo "$day"
-  runhaskell "$dir/${day//d/D}.hs" < "$dir/input.txt"
+  if [ -f "$dir/${day//d/D}.hs" ]; then
+    runhaskell "$dir/${day//d/D}.hs" < "$dir/input.txt"
+  elif [ -f "$dir/$day.sh" ]; then
+    bash "$dir/$day.sh" < "$dir/input.txt"
+  else
+    echo "Failed to run $day"
+  fi
   echo
 }
 
