@@ -1,6 +1,6 @@
 #!/bin/bash
 
-last_day=$(find . -name 'day*' -type d | tail -n1 | sed -E 's/.\/day0?//')
+last_day=$(find . -name 'day*' -type d | sort | tail -n1 | sed -E 's/.\/day0?//')
 day=$(printf "day%02d" "$(( last_day + 1))")
 
 mkdir "$day"
