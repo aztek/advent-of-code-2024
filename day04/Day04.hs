@@ -18,13 +18,13 @@ diagonal = vertical . pad
 antidiagonal = diagonal . map reverse
 
 pad :: [[Char]] -> [[Char]]
-pad = zipWith (<>) (map (`replicate` '.') [0 ..])
+pad = zipWith (<>) $ map (`replicate` '.') [0 ..]
 
 countXmas :: [Char] -> Int
+countXmas ('X' : 'M' : 'A' : tl@('S' : _)) = 1 + countXmas tl
+countXmas ('S' : 'A' : 'M' : tl@('X' : _)) = 1 + countXmas tl
+countXmas (_ : tl) = countXmas tl
 countXmas [] = 0
-countXmas ('X' : 'M' : 'A' : 'S' : str) = 1 + countXmas ('S' : str)
-countXmas ('S' : 'A' : 'M' : 'X' : str) = 1 + countXmas ('X' : str)
-countXmas (_ : str) = countXmas str
 
 xMases :: [[Char]] -> Int
 xMases = length . filter isXmas . squares
@@ -46,5 +46,5 @@ isXmas
   ( (tl, _, tr),
     (_, 'A', _),
     (bl, _, br)
-    ) = sort [tl, tr, bl, br] == "MMSS" && tl /= br && tr /= bl
+    ) = sort [tl, br] == "MS" && sort [tr, bl] == "MS"
 isXmas _ = False

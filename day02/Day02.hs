@@ -4,7 +4,7 @@ main = do
   -- Part 1
   print $ length $ filter isSafeReport reports
   -- Part 2
-  print $ length $ filter isSafishReport reports
+  print $ length $ filter isSafeishReport reports
 
 type Report = [Int]
 
@@ -17,8 +17,8 @@ isSafeReport levels
     all (== Increasing) differences || all (== Decreasing) differences
   | otherwise = False
 
-isSafishReport :: Report -> Bool
-isSafishReport report = isSafeReport report || any isSafeReport (shorts report)
+isSafeishReport :: Report -> Bool
+isSafeishReport report = isSafeReport report || any isSafeReport (shorts report)
 
 shorts :: [a] -> [[a]]
 shorts [] = []
